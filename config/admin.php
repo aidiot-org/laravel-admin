@@ -398,4 +398,23 @@ return [
     'extensions' => [
 
     ],
+
+    /**
+     * Default Routes settings
+     * 
+     * Custom by Webexpert001
+     * 
+     */
+    'routes' => [
+        'users'             => true,
+        'roles'             => true,
+        'permissions'       => true,
+        'menu'              => true,
+        'logs'              => true
+    ],
+
+    /**
+     * Footer Url
+     */
+    'footer_url' => 'https://github.com/webexpert001/laravel-admin'
 ];

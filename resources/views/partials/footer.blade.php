@@ -14,5 +14,5 @@
 
     </div>
     <!-- Default to the left -->
-    <strong>Powered by <a href="https://github.com/z-song/laravel-admin" target="_blank">laravel-admin</a></strong>
+    <strong>Powered by <a href="{{ config('admin.footer_url') }}" target="_blank">{{ config('admin.name') }}</a></strong>
 </footer>

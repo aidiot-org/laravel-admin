@@ -317,11 +317,16 @@ class Admin
             $router->namespace('\Encore\Admin\Controllers')->group(function ($router) {
 
                 /* @var \Illuminate\Routing\Router $router */
-                $router->resource('auth/users', 'UserController')->names('admin.auth.users');
-                $router->resource('auth/roles', 'RoleController')->names('admin.auth.roles');
-                $router->resource('auth/permissions', 'PermissionController')->names('admin.auth.permissions');
-                $router->resource('auth/menu', 'MenuController', ['except' => ['create']])->names('admin.auth.menu');
-                $router->resource('auth/logs', 'LogController', ['only' => ['index', 'destroy']])->names('admin.auth.logs');
+                if (config('admin.routes.users', true) === true)
+                    $router->resource('auth/users', 'UserController')->names('admin.auth.users');
+                if (config('admin.routes.roles', true) === true)
+                    $router->resource('auth/roles', 'RoleController')->names('admin.auth.roles');
+                if (config('admin.routes.permissions', true) === true)
+                    $router->resource('auth/permissions', 'PermissionController')->names('admin.auth.permissions');
+                if (config('admin.routes.menu', true) === true)
+                    $router->resource('auth/menu', 'MenuController', ['except' => ['create']])->names('admin.auth.menu');
+                if (config('admin.routes.logs', true) === true)
+                    $router->resource('auth/logs', 'LogController', ['only' => ['index', 'destroy']])->names('admin.auth.logs');
 
                 $router->post('_handle_form_', 'HandleController@handleForm')->name('admin.handle-form');
                 $router->post('_handle_action_', 'HandleController@handleAction')->name('admin.handle-action');
