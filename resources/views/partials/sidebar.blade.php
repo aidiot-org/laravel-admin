@@ -4,18 +4,18 @@
     <section class="sidebar">
 
         <!-- Sidebar user panel (optional) -->
-        <div class="user-panel">
-            @if (config('admin.custom_settings.no_avatar', false) === false)
+        @if (config('admin.custom_settings.no_avatar', false) === false)
+            <div class="user-panel">
                 <div class="pull-left image">
                     <img src="{{ Admin::user()->avatar }}" class="img-circle" alt="User Image">
                 </div>
-            @endif
-            <div class="pull-left info">
-                <p>{{ Admin::user()->name }}</p>
-                <!-- Status -->
-                <a href="#"><i class="fa fa-circle text-success"></i> {{ trans('admin.online') }}</a>
+                <div class="pull-left info">
+                    <p>{{ Admin::user()->name }}</p>
+                    <!-- Status -->
+                    <a href="#"><i class="fa fa-circle text-success"></i> {{ trans('admin.online') }}</a>
+                </div>
             </div>
-        </div>
+        @endif
 
         @if(config('admin.enable_menu_search'))
         <!-- search form (Optional) -->
