@@ -130,7 +130,9 @@ class AuthController extends Controller
 
         $form->display('username', trans('admin.username'));
         $form->text('name', trans('admin.name'))->rules('required');
-        $form->image('avatar', trans('admin.avatar'));
+        if (config('admin.custom_settings.no_avatar', false) === false) {
+            $form->image('avatar', trans('admin.avatar'));
+        }
         $form->password('password', trans('admin.password'))->rules('confirmed|required');
         $form->password('password_confirmation', trans('admin.password_confirmation'))->rules('required')
             ->default(function ($form) {

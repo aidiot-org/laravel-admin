@@ -5,9 +5,11 @@
 
         <!-- Sidebar user panel (optional) -->
         <div class="user-panel">
-            <div class="pull-left image">
-                <img src="{{ Admin::user()->avatar }}" class="img-circle" alt="User Image">
-            </div>
+            @if (config('admin.custom_settings.no_avatar', false) === false)
+                <div class="pull-left image">
+                    <img src="{{ Admin::user()->avatar }}" class="img-circle" alt="User Image">
+                </div>
+            @endif
             <div class="pull-left info">
                 <p>{{ Admin::user()->name }}</p>
                 <!-- Status -->

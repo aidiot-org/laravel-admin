@@ -30,20 +30,24 @@
                     <!-- Menu Toggle Button -->
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <!-- The user image in the navbar-->
-                        <img src="{{ Admin::user()->avatar }}" class="user-image" alt="User Image">
+                        @if (config('admin.custom_settings.no_avatar', false) === false)
+                            <img src="{{ Admin::user()->avatar }}" class="user-image" alt="User Image">
+                        @endif
                         <!-- hidden-xs hides the username on small devices so only the image appears. -->
                         <span class="hidden-xs">{{ Admin::user()->name }}</span>
                     </a>
                     <ul class="dropdown-menu">
                         <!-- The user image in the menu -->
-                        <li class="user-header">
-                            <img src="{{ Admin::user()->avatar }}" class="img-circle" alt="User Image">
+                        @if (config('admin.custom_settings.no_avatar', false) === false)
+                            <li class="user-header">
+                                <img src="{{ Admin::user()->avatar }}" class="img-circle" alt="User Image">
 
-                            <p>
-                                {{ Admin::user()->name }}
-                                <small>Member since admin {{ Admin::user()->created_at }}</small>
-                            </p>
-                        </li>
+                                <p>
+                                    {{ Admin::user()->name }}
+                                    <small>Member since admin {{ Admin::user()->created_at }}</small>
+                                </p>
+                            </li>
+                        @endif
                         <li class="user-footer">
                             <div class="pull-left">
                                 <a href="{{ admin_url('auth/setting') }}" class="btn btn-default btn-flat">{{ trans('admin.setting') }}</a>
