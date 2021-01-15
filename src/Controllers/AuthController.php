@@ -155,6 +155,10 @@ class AuthController extends Controller
             return redirect(admin_url('auth/setting'));
         });
 
+        $form->disableEditingCheck();
+        $form->disabledCreatingCheck();
+        $form->disableViewCheck();
+
         return $form;
     }
 
