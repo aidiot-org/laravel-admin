@@ -73,26 +73,30 @@ class Between extends AbstractFilter
             return $val !== '';
         });
 
+        if (!empty($value['type'])) {
+            unset($value['type']);
+        }
+
         if (empty($value)) {
             return;
         }
 
         if (!empty($value['type']) && $value['type'] === 'date') {
-            if (!empty($value['start'])) {
+            if (isset($value['start'])) {
                 $value['start'] = $value['start'] . ' 00:00:00';
                 $this->value['start'] = $this->value['start'] . ' 00:00:00';
             }
-            if (!empty($value['end'])) {
+            if (isset($value['end'])) {
                 $value['end'] = $value['end'] . ' 23:59:59';
                 $this->value['end'] = $this->value['end'] . ' 23:59:59';
             }
         }
 
-        if (empty($value['start'])) {
+        if (!isset($value['start'])) {
             return $this->buildCondition($this->column, '<=', $value['end']);
         }
 
-        if (empty($value['end'])) {
+        if (!isset($value['end'])) {
             return $this->buildCondition($this->column, '>=', $value['start']);
         }
 
