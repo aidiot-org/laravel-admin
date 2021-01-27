@@ -78,10 +78,14 @@ class Between extends AbstractFilter
         }
 
         if (!isset($value['start'])) {
+            if (isset($value['type']))
+                return $this->buildCondition($this->column, '<=', $value['end'] . ' 23:59:59');
             return $this->buildCondition($this->column, '<=', $value['end']);
         }
 
         if (!isset($value['end'])) {
+            if (isset($value['type']))
+                return $this->buildCondition($this->column, '<=', $value['start'] . ' 00:00:00');
             return $this->buildCondition($this->column, '>=', $value['start']);
         }
 
@@ -110,6 +114,45 @@ class Between extends AbstractFilter
     protected function setupDatetime($options = [])
     {
         $options['format'] = Arr::get($options, 'format', 'YYYY-MM-DD HH:mm:ss');
+        $options['locale'] = Arr::get($options, 'locale', config('app.locale'));
+
+        $startOptions = json_encode($options);
+        $endOptions = json_encode($options + ['useCurrent' => false]);
+
+        $script = <<<EOT
+            $('#{$this->id['start']}').datetimepicker($startOptions);
+            $('#{$this->id['end']}').datetimepicker($endOptions);
+            $("#{$this->id['start']}").on("dp.change", function (e) {
+                $('#{$this->id['end']}').data("DateTimePicker").minDate(e.date);
+            });
+            $("#{$this->id['end']}").on("dp.change", function (e) {
+                $('#{$this->id['start']}').data("DateTimePicker").maxDate(e.date);
+            });
+EOT;
+
+        Admin::script($script);
+    }
+    
+    /**
+     * @param array $options
+     *
+     * @return $this
+     */
+    public function date($options = [])
+    {
+        $this->view = 'admin::filter.betweenDate';
+
+        $this->setupDate($options);
+
+        return $this;
+    }
+
+    /**
+     * @param array $options
+     */
+    protected function setupDate($options = [])
+    {
+        $options['format'] = Arr::get($options, 'format', 'YYYY-MM-DD');
         $options['locale'] = Arr::get($options, 'locale', config('app.locale'));
 
         $startOptions = json_encode($options);
