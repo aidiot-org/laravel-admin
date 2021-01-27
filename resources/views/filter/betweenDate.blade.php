@@ -26,5 +26,5 @@
             />
         </div>
     </div>
-    <input type="hidden" name="{{ str_repace('[end]', '[type]', $name['end']) }}" value="date" />
+    <input type="hidden" name="{{ str_replace('[end]', '[type]', $name['end']) }}" value="date" />
 </div>
