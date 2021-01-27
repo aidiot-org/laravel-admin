@@ -80,9 +80,11 @@ class Between extends AbstractFilter
         if (isset($value['type']) && $value['type'] === 'date') {
             if (isset($value['start'])) {
                 $value['start'] = $value['start'] . ' 00:00:00';
+                $this->value['start'] = $this->value['start'] . ' 00:00:00';
             }
             if (isset($value['end'])) {
                 $value['end'] = $value['end'] . ' 23:59:59';
+                $this->value['end'] = $this->value['end'] . ' 23:59:59';
             }
         }
 
