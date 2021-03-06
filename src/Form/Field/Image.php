@@ -35,7 +35,7 @@ class Image extends File
             return $this->destroy();
         }
 
-        $this->name = $this->getStoreName($image);
+        $this->name = $image->getClientOriginalName();
 
         $this->callInterventionMethods($image->getRealPath());
 
