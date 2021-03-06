@@ -345,6 +345,10 @@ trait UploadField
      */
     protected function getStoreName(UploadedFile $file)
     {
+        if(strpos($file->getClientMimeType(),'image') !== false) {
+            return $file->getClientOriginalName();
+        }
+
         if ($this->useUniqueName) {
             return $this->generateUniqueName($file);
         }
