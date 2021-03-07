@@ -32,6 +32,12 @@ trait UploadField
     protected $storage = '';
 
     /**
+     * 同名のファイル名が存在する場合に削除せず上書きするか
+     * @var bool
+     */
+    protected $overwriteFile = false;
+
+    /**
      * If use unique name to store upload file.
      *
      * @var bool
@@ -216,6 +222,16 @@ trait UploadField
     public function retainable($retainable = true)
     {
         $this->retainable = $retainable;
+
+        return $this;
+    }
+
+    /**
+     * 同じファイル名で上書きする
+     */
+    public function overwritable()
+    {
+        $this->overwriteFile = true;
 
         return $this;
     }
@@ -423,8 +439,10 @@ trait UploadField
      */
     public function renameIfExists(UploadedFile $file)
     {
-        if ($this->storage->exists("{$this->getDirectory()}/$this->name")) {
+        if (!$this->overwriteFile && $this->storage->exists("{$this->getDirectory()}/$this->name")) {
             $this->name = $this->generateUniqueName($file);
+        } else {
+            $this->name = $this->original;
         }
     }
 
