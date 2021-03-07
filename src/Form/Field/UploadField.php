@@ -442,7 +442,7 @@ trait UploadField
         if (!$this->overwriteFile && $this->storage->exists("{$this->getDirectory()}/$this->name")) {
             $this->name = $this->generateUniqueName($file);
         } else {
-            $this->name = $this->original;
+            $this->name = $file->getClientOriginalName();
         }
     }
 
