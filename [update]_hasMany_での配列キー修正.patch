@@ -1,0 +1,40 @@
+Index: src/Form/Field/HasMany.php
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/Form/Field/HasMany.php b/src/Form/Field/HasMany.php
+--- a/src/Form/Field/HasMany.php	(revision 1ea589624bcf21f07bff252e8576361f6f621a19)
++++ b/src/Form/Field/HasMany.php	(revision 862a06b818cfb635b6ab288be695c6087af3d7db)
+@@ -490,7 +490,8 @@
+ 
+     index++;
+ 
+-    var template = tpl.html().replace(/{$defaultKey}/g, index);
++    $(this).hide();
++    var template = tpl.html();
+     $('.has-many-{$this->column}-forms').append(template);
+     {$templateScript}
+     return false;
+@@ -541,8 +542,9 @@
+ var index = 0;
+ $('#has-many-{$this->column} > .header').off('click', '.add').on('click', '.add', function(){
+     index++;
+-    var navTabHtml = $('#has-many-{$this->column} > template.nav-tab-tpl').html().replace(/{$defaultKey}/g, index);
+-    var paneHtml = $('#has-many-{$this->column} > template.pane-tpl').html().replace(/{$defaultKey}/g, index);
++    $(this).hide();
++    var navTabHtml = $('#has-many-{$this->column} > template.nav-tab-tpl').html();
++    var paneHtml = $('#has-many-{$this->column} > template.pane-tpl').html();
+     $('#has-many-{$this->column} > .nav').append(navTabHtml);
+     $('#has-many-{$this->column} > .tab-content').append(paneHtml);
+     $('#has-many-{$this->column} > .nav > li:last-child a').tab('show');
+@@ -590,7 +592,8 @@
+ 
+     index++;
+ 
+-    var template = tpl.html().replace(/{$defaultKey}/g, index);
++    $(this).hide();
++    var template = tpl.html();
+     $('.has-many-{$this->column}-forms').append(template);
+     {$templateScript}
+     return false;
