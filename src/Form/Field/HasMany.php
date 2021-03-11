@@ -490,8 +490,7 @@ $('#has-many-{$this->column}').off('click', '.add').on('click', '.add', function
 
     index++;
 
-    $(this).hide();
-    var template = tpl.html();
+    var template = tpl.html().replace(/{$defaultKey}/g, index);
     $('.has-many-{$this->column}-forms').append(template);
     {$templateScript}
     return false;
@@ -542,9 +541,8 @@ $('#has-many-{$this->column} > .nav').off('click', 'i.close-tab').on('click', 'i
 var index = 0;
 $('#has-many-{$this->column} > .header').off('click', '.add').on('click', '.add', function(){
     index++;
-    $(this).hide();
-    var navTabHtml = $('#has-many-{$this->column} > template.nav-tab-tpl').html();
-    var paneHtml = $('#has-many-{$this->column} > template.pane-tpl').html();
+    var navTabHtml = $('#has-many-{$this->column} > template.nav-tab-tpl').html().replace(/{$defaultKey}/g, index);
+    var paneHtml = $('#has-many-{$this->column} > template.pane-tpl').html().replace(/{$defaultKey}/g, index);
     $('#has-many-{$this->column} > .nav').append(navTabHtml);
     $('#has-many-{$this->column} > .tab-content').append(paneHtml);
     $('#has-many-{$this->column} > .nav > li:last-child a').tab('show');
@@ -592,8 +590,7 @@ $('#has-many-{$this->column}').on('click', '.add', function () {
 
     index++;
 
-    $(this).hide();
-    var template = tpl.html();
+    var template = tpl.html().replace(/{$defaultKey}/g, index);
     $('.has-many-{$this->column}-forms').append(template);
     {$templateScript}
     return false;
